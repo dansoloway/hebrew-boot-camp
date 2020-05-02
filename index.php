@@ -1,4 +1,6 @@
 <?php
+    define(PATH_TO_SOUNDS, '/Users/daniel-new/sites/hebrew-boot-camp/sounds/');
+    define(URL_OF_SOUNDS, 'http://localhost/hebrew-boot-camp/sounds/');
     /* Map Rows and Loop Through Them */
     $rows   = array_map('str_getcsv', file('data.csv'));
     $header = array_shift($rows);
@@ -11,13 +13,18 @@
     // echo "</pre>";
 
     function returnPlayer($link){
-        $ret = '
-        <audio controls style="max-width: 100%">
-          <source src="horse.ogg" type="audio/ogg">
-          <source src="horse.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-        </audio>
-        ';
+        $linkToFile = PATH_TO_SOUNDS . $link . ".mp3";
+        $urlOfLink = URL_OF_SOUNDS . $link . ".mp3";
+        $fileExists =  file_exists($linkToFile);
+        if($fileExists){
+            $ret = '
+            <audio controls style="max-width: 100%">
+            <source src="sounds/'.$link.'.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+            </audio>
+            ';
+        }
+        else $ret = 'File Not Found! ' . $linkToFile;
         return $ret;
     }
 ?>
@@ -29,7 +36,7 @@
 
         <style>
             .female{
-                color: pink;
+                color: #ff728b;
             }
             .male{
                 color: blue;
@@ -43,6 +50,9 @@
             }
             .neutral{
                 color: green;
+            }
+            .hebrew{
+                direction:rtl;
             }
         </style>
     </head>
@@ -62,7 +72,7 @@
                         <h2><?php echo $row['neutral-trans'] ?></h2>
                     </div>
                     <div class="col-4 neutral">
-                        <h2><?php echo returnPlayer($row['neutral-sound'])  ?></h2>
+                        <h2><?php echo returnPlayer($row['english'])  ?></h2>
                     </div>
                     <div class="col-4 neutral">
                         <h2 class="hebrew"><?php echo $row['neutral-hebrew'] ?></h2>
@@ -71,14 +81,17 @@
 
 
 
-                <?php } else { ?>
+                <?php } else {
+                    $maleSound = $row['english'] . "-m";
+                    $femaleSound = $row['english'] . "-f";
+                    ?>
                     <div class="row col-12">
                         <div class="col-6 row">
                             <div class="col-12">
                                 <h2 class="female"><?php echo $row['female-trans'] ?></h2>
                             </div>
                             <div class="col-6">
-                                <h2 class="female"><?php echo returnPlayer($row['female-sound'])  ?></h2>
+                                <h2 class="female"><?php echo returnPlayer($femaleSound)  ?></h2>
                             </div>
                             <div class="col-6">
                                 <h2 class="female hebrew"><?php echo $row['female-hebrew'] ?></h2>
@@ -90,7 +103,7 @@
                                 <h2 class="male"><?php echo $row['male-trans'] ?></h2>
                             </div>
                             <div class="col-6">
-                                <h2 class="male"><?php echo returnPlayer($row['male-sound'])  ?></h2>
+                                <h2 class="male"><?php echo returnPlayer($maleSound)  ?></h2>
                             </div>
                             <div class="col-6">
                                 <h2 class="male hebrew"><?php echo $row['male-hebrew'] ?></h2>
