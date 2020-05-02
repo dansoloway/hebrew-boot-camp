@@ -72,7 +72,7 @@
                         <h2><?php echo $row['neutral-trans'] ?></h2>
                     </div>
                     <div class="col-4 neutral">
-                        <h2><?php echo returnPlayer($row['english'])  ?></h2>
+                        <h2><?php echo returnPlayer($row['sound'])  ?></h2>
                     </div>
                     <div class="col-4 neutral">
                         <h2 class="hebrew"><?php echo $row['neutral-hebrew'] ?></h2>
@@ -82,8 +82,8 @@
 
 
                 <?php } else {
-                    $maleSound = $row['english'] . "-m";
-                    $femaleSound = $row['english'] . "-f";
+                    $maleSound = $row['sound'] . "-m";
+                    $femaleSound = $row['sound'] . "-f";
                     ?>
                     <div class="row col-12">
                         <div class="col-6 row">
