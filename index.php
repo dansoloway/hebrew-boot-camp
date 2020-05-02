@@ -1,6 +1,6 @@
 <?php
-    define(PATH_TO_SOUNDS, '/Users/daniel-new/sites/hebrew-boot-camp/sounds/');
-    define(URL_OF_SOUNDS, 'http://localhost/hebrew-boot-camp/sounds/');
+    define(PATH_TO_SOUNDS, '/home/danigdtm/public_html/hebrew-boot-camp/sounds/');
+    define(URL_OF_SOUNDS, 'https://danielsoloway.com/hebrew-boot-camp/sounds/');
     /* Map Rows and Loop Through Them */
     $rows   = array_map('str_getcsv', file('data.csv'));
     $header = array_shift($rows);
@@ -35,25 +35,44 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
         <style>
-            .female{
-                color: #ff728b;
+
+
+        .container{
+            max-width:100% !important;
+            width:100% !important;
+        }
+        .female{
+            color: #ff728b;
+        }
+        .male{
+            color: blue;
+        }
+        .termCont{
+            width: 100%;
+            margin: 20px 0;
+            padding-bottom: 10px;
+            -webkit-box-shadow: 5px 5px 5px 0px rgba(173,173,173,0.59);
+            box-shadow: 5px 5px 5px 0px rgba(173,173,173,0.59);
+        }
+        .neutral{
+            color: green;
+        }
+        .hebrew{
+            direction:rtl;
+        }
+        audio {
+          box-shadow: 5px 5px 20px rgba(0,0, 0, 0.4);
+          border-radius: 90px;
+          transform: scale(1.2);
+          margin:20px
+        }
+
+        @media only screen and (max-width: 768px) {
+            .h2 h2{
+                font-size:2.5rem;
             }
-            .male{
-                color: blue;
-            }
-            .termCont{
-                width: 100%;
-                margin: 20px 0;
-                padding-bottom: 10px;
-                -webkit-box-shadow: 5px 5px 5px 0px rgba(173,173,173,0.59);
-                box-shadow: 5px 5px 5px 0px rgba(173,173,173,0.59);
-            }
-            .neutral{
-                color: green;
-            }
-            .hebrew{
-                direction:rtl;
-            }
+        }
+
         </style>
     </head>
     <body>
@@ -68,13 +87,13 @@
                 </div>
                 <?php if($row['class'] == 'neutral') {?>
                 <div class="row col-12">
-                    <div class="col-4 neutral">
+                    <div class="col-3 neutral">
                         <h2><?php echo $row['neutral-trans'] ?></h2>
                     </div>
-                    <div class="col-4 neutral">
+                    <div class="col-6 neutral">
                         <h2><?php echo returnPlayer($row['sound'])  ?></h2>
                     </div>
-                    <div class="col-4 neutral">
+                    <div class="col-3 neutral">
                         <h2 class="hebrew"><?php echo $row['neutral-hebrew'] ?></h2>
                     </div>
                 </div>
@@ -90,10 +109,10 @@
                             <div class="col-12">
                                 <h2 class="female"><?php echo $row['female-trans'] ?></h2>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h2 class="female"><?php echo returnPlayer($femaleSound)  ?></h2>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h2 class="female hebrew"><?php echo $row['female-hebrew'] ?></h2>
                             </div>
                         </div>
@@ -102,10 +121,10 @@
                             <div class="col-12">
                                 <h2 class="male"><?php echo $row['male-trans'] ?></h2>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h2 class="male"><?php echo returnPlayer($maleSound)  ?></h2>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <h2 class="male hebrew"><?php echo $row['male-hebrew'] ?></h2>
                             </div>
                         </div>
